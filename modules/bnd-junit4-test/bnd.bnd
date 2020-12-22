@@ -1,3 +1,3 @@
-Bundle-Name: foo-test
-Bundle-SymbolicName: foo.test
+Bundle-Name: bnd.junit4.test
+Bundle-SymbolicName: bnd.junit4.test
 Bundle-Version: 1.0.0
