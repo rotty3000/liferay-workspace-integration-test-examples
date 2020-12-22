@@ -7,7 +7,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath group: "biz.aQute.bnd", name: "biz.aQute.bnd.gradle", version: "5.2.0"
+		classpath group: "biz.aQute.bnd", name: "biz.aQute.bnd.gradle", version: "5.3.0-SNAPSHOT"
 	}
 }
 
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
 	// testModules are deployed to Liferay as part of setting up the testing infrastructure, communications and test support
-	testModules group: "biz.aQute.bnd", name: "biz.aQute.remote.agent", version: "5.2.0", transitive: false
+	testModules group: "biz.aQute.bnd", name: "biz.aQute.remote.agent", version: "5.3.0-SNAPSHOT", transitive: false
 
 	testIntegrationCompileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
 	testIntegrationCompileOnly group: "org.osgi", name: "org.osgi.core"
