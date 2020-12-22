@@ -1,0 +1,71 @@
+import aQute.bnd.gradle.Resolve
+import aQute.bnd.gradle.TestOSGi
+
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies {
+		classpath group: "biz.aQute.bnd", name: "biz.aQute.bnd.gradle", version: "5.3.0-SNAPSHOT"
+	}
+}
+
+repositories {
+	mavenLocal()
+}
+
+dependencies {
+	// testModules are deployed to Liferay as part of setting up the testing infrastructure, communications and test support
+	testModules group: "biz.aQute.bnd", name: "biz.aQute.remote.agent", version: "5.3.0-SNAPSHOT", transitive: false
+
+	testIntegrationCompileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
+	testIntegrationCompileOnly group: "org.osgi", name: "org.osgi.core"
+
+	testIntegrationCompile group: "org.osgi", name: "org.osgi.test.assertj.framework", version: "0.10.0"
+	testIntegrationCompile group: "org.osgi", name: "org.osgi.test.junit4", version: "0.10.0"
+}
+
+tasks.named('jar') {
+	classpath sourceSets.testIntegration.compileClasspath
+	from sourceSets.testIntegration.output
+	manifest {
+		attributes(
+			"Test-Cases": '${classes;HIERARCHY_ANNOTATED;org.junit.Test;CONCRETE}'
+		)
+	}
+}
+
+ext.targetPlatformDistro = "${rootProject.configurations.targetPlatformDistro.singleFile.absolutePath};version=file"
+
+tasks.register('resolve', Resolve) {
+	dependsOn tasks.named('jar')
+
+	bndrun 'bnd.bndrun'
+	bundles += [
+		rootProject.configurations.targetPlatformDistro, 
+		sourceSets.testIntegration.runtimeClasspath
+	]
+}
+
+tasks.register('testIntegrationBnd', TestOSGi) {
+	dependsOn tasks.named('resolve'), tasks.named('testIntegration')
+	
+	bndrun 'bnd.bndrun'
+	bundles += [
+		rootProject.configurations.targetPlatformDistro, 
+		sourceSets.testIntegration.runtimeClasspath
+	]
+}
+
+tasks.named('testIntegration') {
+	dependsOn tasks.named('resolve')
+	
+	actions = []
+	
+	finalizedBy tasks.named('testIntegrationBnd')
+}
+
+startTestableTomcat {
+	executableArgs = ["jpda", "run"]
+}
