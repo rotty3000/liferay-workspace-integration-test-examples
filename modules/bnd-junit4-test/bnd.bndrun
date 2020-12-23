@@ -1,24 +1,32 @@
+# include the _patform.bndrun_ provided by the workspace template (make sure to use a recent version of blade)
 -include: ../../platform.bndrun
 
-# Overload the default set in ${root}/platform.bndrun
+# Overload the default set in _platform.bndrun_ (necessary since it's not visible from the project)
 targetPlatformDistro: ${project.targetPlatformDistro}
 
+# in order to connect to remote runtime (a.k.a. Liferay CE/DXP) add the remote launcher to the tester runpath (the
+# classspath of the test client)
 -runpath: biz.aQute.remote.launcher;version=latest
 
--runremote: test;\
-	shell   =   -1; \
-	jdb     =   8000; \
-	host    =   localhost; \
-	agent   =   29998; \
-	timeout =   30000
+# configure the remote connection (used by the remote launcher to connect to the remote agent deployed to
+# Liferay CE/DXP)
+-runremote: \
+	test;\
+		shell=-1;\
+		jdb=8000;\
+		host=localhost;\
+		agent=29998;\
+		timeout=30000
 
+# OPTIONAL: enable tracing for the test execution
 -runtrace: true
 
-# This will help us keep -runbundles sorted
+# the _-runbundles_ property is calculated by the _resolve_ task. this helps keep the result sorted
 -runstartlevel: \
     order=sortbynameversion,\
     begin=-1
 
+# the calculated set of deployment dependencies
 -runbundles: \
 	assertj-core;version='[3.17.2,3.17.3)',\
 	bnd.junit4.test;version='[1.0.0,1.0.1)',\
