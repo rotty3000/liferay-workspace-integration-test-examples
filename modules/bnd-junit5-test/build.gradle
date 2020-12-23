@@ -29,12 +29,17 @@ dependencies {
 	testIntegrationCompileOnly group: "org.osgi", name: "org.osgi.core"
 
 	// use _testIntegrationCompile_ for dependencies which are required at compile time AND must be deployed at runtime
+	testIntegrationCompile group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.7.0"
 	testIntegrationCompile group: "org.osgi", name: "org.osgi.test.assertj.framework", version: "0.10.0"
-	testIntegrationCompile group: "org.osgi", name: "org.osgi.test.junit4", version: "0.10.0"
+	testIntegrationCompile group: "org.osgi", name: "org.osgi.test.junit5", version: "0.10.0"
 
 	// use _testIntegrationRuntimeOnly_ for dependencies which are required only at runtime (typically identified during
 	// resolve)
-	// testIntegrationRuntimeOnly group: "com.biz", name: "com.biz.bar", version: "1.0.0"
+	testIntegrationRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-params", version: "5.7.0"
+	testIntegrationRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.7.0"
+	testIntegrationRuntimeOnly group: "org.junit.platform", name: "junit-platform-engine", version: "1.7.0"
+	testIntegrationRuntimeOnly group: "org.junit.platform", name: "junit-platform-launcher", version: "1.7.0"
+	testIntegrationRuntimeOnly group: "org.junit.platform", name: "junit-platform-commons", version: "1.7.0"
 }
 
 // obtain the _targetPlatformDistro_ file for the specified version of Liferay. this is used to resolve modules against

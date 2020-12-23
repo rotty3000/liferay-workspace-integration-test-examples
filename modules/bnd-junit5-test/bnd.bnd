@@ -1,0 +1,5 @@
+Bundle-Name: bnd.junit5.test
+Bundle-SymbolicName: bnd.junit5.test
+Bundle-Version: 1.0.0
+
+Test-Cases: ${classes;HIERARCHY_INDIRECTLY_ANNOTATED;org.junit.platform.commons.annotation.Testable;CONCRETE}

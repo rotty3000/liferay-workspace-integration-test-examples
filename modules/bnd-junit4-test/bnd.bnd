@@ -1,3 +1,5 @@
 Bundle-Name: bnd.junit4.test
 Bundle-SymbolicName: bnd.junit4.test
 Bundle-Version: 1.0.0
+
+Test-Cases: ${classes;HIERARCHY_ANNOTATED;org.junit.Test;CONCRETE}
