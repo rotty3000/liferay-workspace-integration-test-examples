@@ -36,13 +36,14 @@ targetPlatformDistro: ${project.targetPlatformDistro}
 
 # the calculated set of deployment dependencies
 -runbundles: \
-	assertj-core;version='[3.17.2,3.17.3)',\
+	assertj-core;version='[3.18.1,3.18.2)',\
 	bnd.junit5.test;version='[1.0.0,1.0.1)',\
 	junit-jupiter-api;version='[5.7.0,5.7.1)',\
 	junit-jupiter-engine;version='[5.7.0,5.7.1)',\
+	junit-jupiter-params;version='[5.7.0,5.7.1)',\
 	junit-platform-commons;version='[1.7.0,1.7.1)',\
 	junit-platform-engine;version='[1.7.0,1.7.1)',\
 	junit-platform-launcher;version='[1.7.0,1.7.1)',\
 	org.opentest4j;version='[1.2.0,1.2.1)',\
-	org.osgi.test.common;version='[0.10.0,0.10.1)',\
-	org.osgi.test.junit5;version='[0.10.0,0.10.1)'
+	org.osgi.test.common;version='[0.11.0,0.11.1)',\
+	org.osgi.test.junit5;version='[0.11.0,0.11.1)'
